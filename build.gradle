@@ -3,7 +3,9 @@ plugins {
     id 'org.springframework.boot' version '3.2.3'
     id 'io.spring.dependency-management' version '1.1.4'
 }
-
+springBoot {
+    buildInfo()
+}
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
@@ -11,11 +13,11 @@ java {
     sourceCompatibility = '17'
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+//configurations {
+//    all {
+//        exclude group: 'com.revdebug', module: 'revdebug-compiler'
+//    }
+//}
 
 repositories {
     mavenCentral()
@@ -28,17 +30,39 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    //runtimeOnly 'com.mysql:mysql-connector-java:8.0.26'
     implementation 'mysql:mysql-connector-java:8.0.26'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    compileOnly 'com.revdebug:revdebug-compiler:7.2.0'
-    annotationProcessor 'com.revdebug:revdebug-compiler:7.2.0' // Required after Gradle v4.10.2
-    implementation 'com.revdebug:revdebug-runtime:7.2.0'
+//    compileOnly 'com.revdebug:revdebug-compiler:7.1.1'
+//    annotationProcessor 'com.revdebug:revdebug-compiler:7.1.1' // Required after Gradle v4.10.2
+//    implementation 'com.revdebug:revdebug-runtime:7.1.1'
+//    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+//tasks.withType(JavaCompile) {
+  //  options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//}
+//
+//compileJava {
+//    options.compilerArgs = [
+//          "-Xplugin:RevDeBugCompiler",
+//           "-AREVDEBUG_SERVER_HOSTNAME=192.168.56.5",
+//         // "-AREVDEBUG_SERVER_HOSTNAME=35.207.102.137",
+//           "-AREVDEBUG_SECURE_CONNECTION=false"
+//    ]}
+
+bootJar {
+    excludes = ['com.revdebug:revdebug-compiler']
+}
+//bootRun {
+//    jvmArgs = [
+//            "-javaagent:C:/Users/Asia/revdebug-agent-7.2.1/skywalking-agent.jar"
+//    ]
+//}

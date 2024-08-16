@@ -27,11 +27,18 @@ public class BookingController {
         this.service = service;
     }
 
+
     @GetMapping("/rezerwacje")
     public List<Booking> getBookings(){
 return service.getBookings();
     }
-    @PostMapping("/dodajRezerwacje")
+
+    @GetMapping("/rezerwacje2")
+    public void getBookings2(){
+        int a = 0;
+        a = a/a;
+    }
+   @PostMapping("/dodajRezerwacje")
     public void savaBooking(@RequestBody Booking booking){
         System.out.println(booking.getName());
         System.out.println(booking.getArrivalDate());
@@ -83,6 +90,8 @@ return service.getBookings();
 
         return service.calculatePrice(bookingForPriceCalculation);
     }
+
+
 
 
 
