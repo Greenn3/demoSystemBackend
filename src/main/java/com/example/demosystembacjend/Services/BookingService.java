@@ -126,4 +126,7 @@ public List<Booking> getBookingByArrivalDate(LocalDate arrivalDate)
     }
 
 
+    public Booking findBookingById(Integer id) {
+     return bookingRepository.findBookingById(id);
+    }
 }

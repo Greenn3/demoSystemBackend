@@ -91,6 +91,13 @@ return service.getBookings();
         return service.calculatePrice(bookingForPriceCalculation);
     }
 
+    @GetMapping("/getBookingById")
+    public Booking findBookingById(@RequestParam("id") Integer id){
+        System.out.println("Tutu");
+        return service.findBookingById(id);
+
+    }
+
 
 
 
